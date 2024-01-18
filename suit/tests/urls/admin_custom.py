@@ -1,9 +1,11 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns
 from django.contrib import admin
+from django.urls import include, path
 
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    "",
     # Examples for custom menu
-    url(r'^foo/bar/', include(admin.site.urls)),
+    path("foo/bar/", include(admin.site.urls)),
 )

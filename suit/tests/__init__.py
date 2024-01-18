@@ -1,25 +1,20 @@
 import django
-try:
-    # Django 1.9+
-    django.setup()
-except Exception:
-    pass
+from django.test.runner import DiscoverRunner as DjangoTestSuiteRunner
 
-from suit.tests.templatetags.suit_menu import SuitMenuTestCase, \
-    SuitMenuAdminRootURLTestCase, SuitMenuAdminI18NURLTestCase, \
-    SuitMenuAdminCustomURLTestCase
-from suit.tests.templatetags.suit_tags import SuitTagsTestCase
-from suit.tests.templatetags.suit_list import SuitListTestCase
-from suit.tests.templates.form_tabs import FormTabsTestCase
+django.setup()
+
 from suit.tests.config import ConfigTestCase, ConfigWithModelsTestCase
-from suit.tests.widgets import WidgetsTestCase
+from suit.tests.templates.form_tabs import FormTabsTestCase
+from suit.tests.templatetags.suit_list import SuitListTestCase
+from suit.tests.templatetags.suit_menu import (
+    SuitMenuAdminCustomURLTestCase,
+    SuitMenuAdminI18NURLTestCase,
+    SuitMenuAdminRootURLTestCase,
+    SuitMenuTestCase,
+)
+from suit.tests.templatetags.suit_tags import SuitTagsTestCase
 from suit.tests.utils import UtilsTestCase
-
-try:
-    # Django 1.7+
-    from django.test.runner import DiscoverRunner as DjangoTestSuiteRunner
-except ImportError:
-    from django.test.simple import DjangoTestSuiteRunner
+from suit.tests.widgets import WidgetsTestCase
 
 
 class NoDbTestRunner(DjangoTestSuiteRunner):
