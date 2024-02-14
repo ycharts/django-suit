@@ -13,10 +13,11 @@ from django.utils.safestring import mark_safe
 from suit.compat import tpl_context_class
 
 # Starting with Django 3.2, the pagination is 1-based instead of 0-based.
-# I've taken the implementations (latest at the time of release 3.2) from https://github.com/django/django/blob/main/django/contrib/admin/templatetags/admin_list.py
+# I've taken the implementations (latest at the time of release 3.2) from
+# https://github.com/django/django/blob/main/django/contrib/admin/templatetags/admin_list.py
 # to use in the implementations below. Older versions of django will use the old implementation and will keep working.
-# There are corresponding CSS changes in suit/static/suit/less/ui/pagination.less to fix the pagination, as the code below generates different html objects.
-print(django.get_version())
+# There are corresponding CSS changes in suit/static/suit/less/ui/pagination.less to fix the pagination, as the code
+# below generates different html objects.
 USE_NEW_DJANGO_ADMIN_PAGINATION = django.get_version() >= "3.2"
 
 
