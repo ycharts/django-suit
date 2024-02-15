@@ -67,12 +67,8 @@ class SuitTagsTestCase(TestCase):
             "HEADER_DATE_FORMAT": "Y-m-d",
             "HEADER_TIME_FORMAT": "H:i",
         }
-        self.assertEqual(
-            datetime.datetime.now().strftime("%Y-%m-%d"), suit_date({}, {}).render({})
-        )
-        self.assertEqual(
-            datetime.datetime.now().strftime("%H:%M"), suit_time({}, {}).render({})
-        )
+        self.assertEqual(datetime.datetime.now().strftime("%Y-%m-%d"), suit_date({}, {}).render({}))
+        self.assertEqual(datetime.datetime.now().strftime("%H:%M"), suit_time({}, {}).render({}))
 
     def test_admin_url(self):
         country = Country(pk=1, name="USA")

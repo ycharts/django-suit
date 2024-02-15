@@ -102,10 +102,7 @@ class AutosizedTextarea(Textarea):
         else:
             output = super(AutosizedTextarea, self).render(name, value, attrs, renderer)
 
-        output += mark_safe(
-            "<script type=\"text/javascript\">Suit.$('#id_%s').autosize();</script>"
-            % name
-        )
+        output += mark_safe("<script type=\"text/javascript\">Suit.$('#id_%s').autosize();</script>" % name)
         return output
 
 
@@ -160,12 +157,11 @@ class SuitSplitDateTimeWidget(forms.SplitDateTimeWidget):
         def format_output(self, rendered_widgets):
             out_tpl = '<div class="datetime">%s %s</div>'
             return mark_safe(out_tpl % (rendered_widgets[0], rendered_widgets[1]))
+
     else:
 
         def render(self, name, value, attrs=None, renderer=None):
-            output = super(SuitSplitDateTimeWidget, self).render(
-                name, value, attrs, renderer
-            )
+            output = super(SuitSplitDateTimeWidget, self).render(name, value, attrs, renderer)
             return mark_safe('<div class="datetime">%s</div>' % output)
 
 

@@ -57,15 +57,14 @@ def field_contents_foreign_linked(admin_field):
     displayed = admin_field.contents()
     obj = admin_field.form.instance
 
-    if not hasattr(admin_field.model_admin,
-                   'linked_readonly_fields') or fieldname not in admin_field \
-            .model_admin \
-            .linked_readonly_fields:
+    if (
+        not hasattr(admin_field.model_admin, 'linked_readonly_fields')
+        or fieldname not in admin_field.model_admin.linked_readonly_fields
+    ):
         return displayed
 
     try:
-        fieldtype, attr, value = lookup_field(fieldname, obj,
-                                              admin_field.model_admin)
+        fieldtype, attr, value = lookup_field(fieldname, obj, admin_field.model_admin)
     except ObjectDoesNotExist:
         fieldtype = None
 
@@ -97,10 +96,9 @@ def suit_bc_value(*args):
 
 @simple_tag
 def admin_extra_filters(cl):
-    """ Return the dict of used filters which is not included
-    in list_filters form """
-    used_parameters = list(itertools.chain(*(s.used_parameters.keys()
-                                             for s in cl.filter_specs)))
+    """Return the dict of used filters which is not included
+    in list_filters form"""
+    used_parameters = list(itertools.chain(*(s.used_parameters.keys() for s in cl.filter_specs)))
     return dict((k, v) for k, v in cl.params.items() if k not in used_parameters)
 
 
@@ -139,10 +137,10 @@ if django_version < (1, 9):
     def add_preserved_filters(*args, **kwargs):
         pass
 
+
 if django_version < (1, 5):
     # Add admin_urlquote filter to support Django 1.4
     from django.contrib.admin.util import quote
-
 
     @register.filter
     def admin_urlquote(value):

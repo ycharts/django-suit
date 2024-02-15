@@ -164,9 +164,7 @@ class SuitListTestCase(UserTestCaseMixin, ModelsTestCaseMixin):
         self.assertTrue('data="1"' in result[0][2])
         self.assertTrue('class="col-action_checkbox"' in result[0][0])
         # Django 1.6 adds col-NAME class automatically
-        self.assertTrue(
-            'class="test"' in result[0][1] or 'class="col-name test"' in result[0][1]
-        )
+        self.assertTrue('class="test"' in result[0][1] or 'class="col-name test"' in result[0][1])
         self.assertTrue('class="col-order"' in result[0][2])
 
     def test_suit_list_cells_handler_by_response(self):

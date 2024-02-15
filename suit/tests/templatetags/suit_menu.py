@@ -127,9 +127,7 @@ class SuitMenuTestCase(ModelsTestCaseMixin, UserTestCaseMixin):
         settings.SUIT_CONFIG["SEARCH_URL"] = "admin:%s_book_changelist" % app_label
         admin_root = reverse("admin:index")
         self.get_response()
-        self.assertContains(
-            self.response, 'action="%s%s/book/"' % (admin_root, app_label)
-        )
+        self.assertContains(self.response, 'action="%s%s/book/"' % (admin_root, app_label))
 
         # Test absolute url
         absolute_search_url = "/absolute/search/url"
@@ -227,18 +225,10 @@ class SuitMenuTestCase(ModelsTestCaseMixin, UserTestCaseMixin):
         first_model_url = reverse("admin:%s_book_changelist" % app_label)
         self.assertEqual(menu[i]["models"][0]["url"], first_model_url)
         self.assertEqual(len(menu[i]["models"]), 4)
-        self.assertEqual(
-            force_unicode(menu[i]["models"][2]["label"]), mc[i]["models"][2]["label"]
-        )
-        self.assertEqual(
-            force_unicode(menu[i]["models"][2]["url"]), mc[i]["models"][2]["url"]
-        )
-        self.assertEqual(
-            force_unicode(menu[i]["models"][3]["label"]), mc[i]["models"][3]["label"]
-        )
-        self.assertEqual(
-            force_unicode(menu[i]["models"][3]["url"]), mc[i]["models"][3]["url"]
-        )
+        self.assertEqual(force_unicode(menu[i]["models"][2]["label"]), mc[i]["models"][2]["label"])
+        self.assertEqual(force_unicode(menu[i]["models"][2]["url"]), mc[i]["models"][2]["url"])
+        self.assertEqual(force_unicode(menu[i]["models"][3]["label"]), mc[i]["models"][3]["label"])
+        self.assertEqual(force_unicode(menu[i]["models"][3]["url"]), mc[i]["models"][3]["url"])
 
     def test_menu_app_exclude(self):
         settings.SUIT_CONFIG["MENU"] = (

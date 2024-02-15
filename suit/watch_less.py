@@ -7,7 +7,6 @@ from watchdog.events import FileSystemEventHandler, FileModifiedEvent
 
 
 class LessCompiler(FileSystemEventHandler):
-
     def __init__(self, source):
         self.source = source
         FileSystemEventHandler.__init__(self)
@@ -29,8 +28,7 @@ class LessCompiler(FileSystemEventHandler):
 if __name__ == "__main__":
 
     if len(sys.argv) < 2:
-        sys.stderr.write(
-            'Usage: %s source [destination=../css/$1.css]\n' % sys.argv[0])
+        sys.stderr.write('Usage: %s source [destination=../css/$1.css]\n' % sys.argv[0])
         sys.exit(1)
 
     source = os.path.abspath(sys.argv[1])

@@ -55,8 +55,7 @@ class WidgetsTestCase(TestCase):
 
     def get_enclosed_widget_html(self, values):
         return (
-            '<div class="input-prepend input-append">%s<input name="enc" '
-            'type="text" value="123" />%s</div>' % values
+            '<div class="input-prepend input-append">%s<input name="enc" ' 'type="text" value="123" />%s</div>' % values
         )
 
     def get_SuitSplitDateTimeWidget_output(self):
@@ -188,6 +187,4 @@ class WidgetsTestCase(TestCase):
     def test_AutosizedTextarea_media(self):
         txt = AutosizedTextarea()
         js_url = static("suit/js/jquery.autosize-min.js")
-        self.assertHTMLEqual(
-            str(txt.media), '<script src="%s"></script>' % js_url
-        )
+        self.assertHTMLEqual(str(txt.media), '<script src="%s"></script>' % js_url)

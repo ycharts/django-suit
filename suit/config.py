@@ -6,16 +6,13 @@ from . import VERSION
 def default_config():
     return {
         'VERSION': VERSION,
-
         # configurable
         'ADMIN_NAME': 'Django Suit',
         'HEADER_DATE_FORMAT': 'l, jS F Y',
         'HEADER_TIME_FORMAT': 'H:i',
-
         # form
         'SHOW_REQUIRED_ASTERISK': True,
         'CONFIRM_UNSAVED_CHANGES': True,
-
         # menu
         'SEARCH_URL': '/admin/auth/user/',
         'MENU_OPEN_FIRST_CHILD': True,
@@ -30,9 +27,8 @@ def default_config():
         #     {'label': 'Settings', 'icon':'icon-cog', 'models': ('auth.user', 'auth.group')},
         #     {'label': 'Support', 'icon':'icon-question-sign', 'url': '/support/'},
         # ),
-
         # misc
-        'LIST_PER_PAGE': 20
+        'LIST_PER_PAGE': 20,
     }
 
 
@@ -49,12 +45,14 @@ def get_config(param=None):
         return value
     return config
 
+
 # Reverse default actions position
 ModelAdmin.actions_on_top = False
 ModelAdmin.actions_on_bottom = True
 
 # Set global list_per_page
 ModelAdmin.list_per_page = get_config('LIST_PER_PAGE')
+
 
 def setup_filer():
     from suit.widgets import AutosizedTextarea

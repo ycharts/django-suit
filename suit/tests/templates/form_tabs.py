@@ -44,10 +44,6 @@ class FormTabsTestCase(ModelsTestCaseMixin, UserTestCaseMixin):
         suit_form_include = "admin/date_hierarchy.html"
         TabbedBookAdmin.suit_form_includes = ((suit_form_include, "top", "tab1"),)
         self.get_response(self.url)
-        self.assertTemplateUsed(
-            self.response, "suit/includes/change_form_includes.html"
-        )
+        self.assertTemplateUsed(self.response, "suit/includes/change_form_includes.html")
         self.assertTemplateUsed(self.response, suit_form_include)
-        self.assertContains(
-            self.response, '<div class="suit-include suit-tab suit-tab-tab1">'
-        )
+        self.assertContains(self.response, '<div class="suit-include suit-tab suit-tab-tab1">')

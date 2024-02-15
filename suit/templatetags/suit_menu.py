@@ -1,7 +1,6 @@
 import re
 import warnings
 
-import django
 from django import template
 from django.contrib import admin
 from django.contrib.admin import AdminSite
@@ -33,7 +32,7 @@ def get_menu(context, request):
     else:
         try:
             template_response = get_admin_site(context.current_app).index(request)
-        # Django 1.10 removed the current_app parameter for some classes and functions. 
+        # Django 1.10 removed the current_app parameter for some classes and functions.
         # Check the release notes.
         except AttributeError:
             template_response = get_admin_site(context.request.resolver_match.namespace).index(request)
@@ -119,8 +118,7 @@ class Menu(object):
     def make_menu(self, config):
         menu = []
         if not isinstance(config, (tuple, list)):
-            raise TypeError('Django Suit MENU config parameter must be '
-                            'tuple or list. Got %s' % repr(config))
+            raise TypeError('Django Suit MENU config parameter must be ' 'tuple or list. Got %s' % repr(config))
         for app in config:
             app = self.make_app(app)
             if app:
@@ -137,8 +135,7 @@ class Menu(object):
             else:
                 app = self.make_app_from_native(app_def)
         else:
-            raise TypeError('MENU list item must be string or dict. Got %s'
-                            % repr(app_def))
+            raise TypeError('MENU list item must be string or dict. Got %s' % repr(app_def))
         if app:
             return self.process_app(app)
 
@@ -178,10 +175,8 @@ class Menu(object):
 
         return app
 
-
     def app_is_forbidden(self, app):
-        return app['permissions'] and \
-               not self.user_has_permission(app['permissions'])
+        return app['permissions'] and not self.user_has_permission(app['permissions'])
 
     def app_is_excluded(self, app):
         return self.conf_exclude and app['name'] in self.conf_exclude
@@ -193,8 +188,7 @@ class Menu(object):
         """
         if 'icon' in app:
             app['icon'] = app['icon'] or 'icon-'
-        elif self.conf_icons and 'name' in app and \
-                        app['name'] in self.conf_icons:
+        elif self.conf_icons and 'name' in app and app['name'] in self.conf_icons:
             app['icon'] = self.conf_icons[app['name']]
 
     def process_semi_native_app(self, app):
@@ -246,17 +240,10 @@ class Menu(object):
         if not models:
             return
 
-        return {
-            'label': native_app['name'],
-            'url': native_app['app_url'],
-            'models': models,
-            'name': app_name
-        }
+        return {'label': native_app['name'], 'url': native_app['app_url'], 'models': models, 'name': app_name}
 
     def make_separator(self):
-        return {
-            'separator': True
-        }
+        return {'separator': True}
 
     def process_models(self, app):
         models = []
@@ -276,11 +263,11 @@ class Menu(object):
             model = self.make_model(model_def, app_name)
             return [model] if model else []
         prefix = match.group(1)
-        prefix = self.get_model_name(app_name,prefix)
+        prefix = self.get_model_name(app_name, prefix)
         return [
             m
             for m in [
-                self.convert_native_model(native_model,app_name)
+                self.convert_native_model(native_model, app_name)
                 for native_model in self.all_models
                 if self.get_native_model_name(native_model).startswith(prefix)
             ]
@@ -293,8 +280,7 @@ class Menu(object):
         elif isinstance(model_def, str):
             model = self.make_model_from_native(model_def, app_name)
         else:
-            raise TypeError('MENU list item must be string or dict. Got %s'
-                            % repr(model_def))
+            raise TypeError('MENU list item must be string or dict. Got %s' % repr(model_def))
         if model:
             return self.process_model(model, app_name)
 
@@ -327,7 +313,7 @@ class Menu(object):
         """
         url_parts = self.get_native_model_url(model).rstrip('/').split('/')
         root_url_parts = reverse('admin:index').rstrip('/').split('/')
-        return '.'.join(url_parts[len(root_url_parts):][:2])
+        return '.'.join(url_parts[len(root_url_parts) :][:2])
 
     def convert_native_model(self, model, app_name):
         return {
@@ -335,8 +321,8 @@ class Menu(object):
             'url': self.get_native_model_url(model),
             'name': self.get_native_model_name(model),
             'app': app_name,
-            'perms': model.get('perms',None),
-            'add_url': model.get('add_url',None),
+            'perms': model.get('perms', None),
+            'add_url': model.get('add_url', None),
         }
 
     def get_native_model_url(self, model):
@@ -365,23 +351,20 @@ class Menu(object):
             return model
 
     def model_is_forbidden(self, model):
-        return model['permissions'] and \
-               not self.user_has_permission(model['permissions'])
+        return model['permissions'] and not self.user_has_permission(model['permissions'])
 
     def process_semi_native_model(self, model, app_name):
         """
         Process app defined as { model: 'model' }
         """
-        model_from_native = self.make_model_from_native(model['model'],
-                                                        app_name)
+        model_from_native = self.make_model_from_native(model['model'], app_name)
         if model_from_native:
             del model['model']
             model_from_native.update(model)
             return model_from_native
 
     def ensure_app_keys(self, app):
-        keys = ['label', 'url', 'icon', 'permissions', 'name', 'is_active',
-                'blank']
+        keys = ['label', 'url', 'icon', 'permissions', 'name', 'is_active', 'blank']
         self.fill_keys(app, keys)
 
     def ensure_model_keys(self, model):
@@ -409,9 +392,7 @@ class Menu(object):
                 self.activate_models(app)
 
             # Mark as active by url match
-            if not self.app_activated \
-                and (self.request.path == app['url']
-                     or self.request.path == app.get('orig_url')):
+            if not self.app_activated and (self.request.path == app['url'] or self.request.path == app.get('orig_url')):
                 app['is_active'] = self.app_activated = True
 
         if not self.app_activated:
@@ -428,8 +409,7 @@ class Menu(object):
                 # Mark as active by url or model plural name match
                 model['is_active'] = self.request.path == model['url']
             else:
-                model['is_active'] = self.ctx_model_plural == model[
-                    'label'].lower()
+                model['is_active'] = self.ctx_model_plural == model['label'].lower()
 
             # Mark parent as active too
             if model['is_active'] and not self.app_activated:
@@ -489,7 +469,8 @@ class Menu(object):
             warnings.warn(
                 'Django Suit "MENU_ORDER" setting is deprecated. Use new "MENU"'
                 ' key instead, see Documentation for new syntax.',
-                DeprecationWarning)
+                DeprecationWarning,
+            )
 
         new_conf = []
         for order in conf_order:

@@ -34,10 +34,7 @@ def paginator_number(cl, i):
     """
     if not USE_NEW_DJANGO_ADMIN_PAGINATION:
         if i == DOT:
-            return mark_safe(
-                '<li class="disabled"><a href="#" onclick="return false;">..'
-                ".</a></li>"
-            )
+            return mark_safe('<li class="disabled"><a href="#" onclick="return false;">..' ".</a></li>")
         elif i == cl.page_num:
             return mark_safe('<li class="active"><a href="">%d</a></li> ' % (i + 1))
         else:
@@ -73,9 +70,7 @@ def paginator_info(cl):
             entries_from = 1 if paginator.count > 0 else 0
             entries_to = paginator.count
         else:
-            entries_from = (
-                ((paginator.per_page * cl.page_num) + 1) if paginator.count > 0 else 0
-            )
+            entries_from = ((paginator.per_page * cl.page_num) + 1) if paginator.count > 0 else 0
             entries_to = entries_from - 1 + paginator.per_page
             if paginator.count < entries_to:
                 entries_to = paginator.count
@@ -89,9 +84,7 @@ def paginator_info(cl):
         entries_from = 1 if paginator.count > 0 else 0
         entries_to = paginator.count
     else:
-        entries_from = (
-            ((paginator.per_page * (cl.page_num - 1)) + 1) if paginator.count > 0 else 0
-        )
+        entries_from = ((paginator.per_page * (cl.page_num - 1)) + 1) if paginator.count > 0 else 0
         entries_to = entries_from - 1 + paginator.per_page
         if paginator.count < entries_to:
             entries_to = paginator.count
@@ -132,9 +125,7 @@ def pagination(cl):
                 if page_num < (paginator.num_pages - ON_EACH_SIDE - ON_ENDS - 1):
                     page_range.extend(range(page_num + 1, page_num + ON_EACH_SIDE + 1))
                     page_range.append(DOT)
-                    page_range.extend(
-                        range(paginator.num_pages - ON_ENDS, paginator.num_pages)
-                    )
+                    page_range.extend(range(paginator.num_pages - ON_ENDS, paginator.num_pages))
                 else:
                     page_range.extend(range(page_num + 1, paginator.num_pages))
 
@@ -149,9 +140,7 @@ def pagination(cl):
         }
 
     pagination_required = (not cl.show_all or not cl.can_show_all) and cl.multi_page
-    page_range = (
-        cl.paginator.get_elided_page_range(cl.page_num) if pagination_required else []
-    )
+    page_range = cl.paginator.get_elided_page_range(cl.page_num) if pagination_required else []
     need_show_all_link = cl.can_show_all and not cl.show_all and cl.multi_page
     return {
         "cl": cl,
@@ -219,15 +208,13 @@ def headers_handler(result_headers, cl):
         field_name = cl.list_display[i]
         if field_name == "action_checkbox":
             continue
-        if not attrib_key in header:
+        if attrib_key not in header:
             header[attrib_key] = mark_safe(' class=""')
 
         pattern = 'class="'
         if pattern in header[attrib_key]:
             replacement = "%s%s-column " % (pattern, field_name)
-            header[attrib_key] = mark_safe(
-                header[attrib_key].replace(pattern, replacement)
-            )
+            header[attrib_key] = mark_safe(header[attrib_key].replace(pattern, replacement))
 
     return result_headers
 
@@ -274,8 +261,7 @@ def result_row_attrs(context, cl, row_index):
     # Validate
     if not isinstance(new_attrs, dict):
         raise TypeError(
-            '"suit_row_attributes" must return dict. Got: %s: %s'
-            % (new_attrs.__class__.__name__, new_attrs)
+            '"suit_row_attributes" must return dict. Got: %s: %s' % (new_attrs.__class__.__name__, new_attrs)
         )
 
     # Merge 'class' attribute
@@ -309,8 +295,7 @@ def cells_handler(results, cl):
             # Validate
             if not isinstance(attrs, dict):
                 raise TypeError(
-                    '"suit_cell_attributes" must return dict. '
-                    "Got: %s: %s" % (attrs.__class__.__name__, attrs)
+                    '"suit_cell_attributes" must return dict. ' "Got: %s: %s" % (attrs.__class__.__name__, attrs)
                 )
 
             # Merge 'class' attribute
@@ -323,8 +308,6 @@ def cells_handler(results, cl):
             if attrs:
                 cell_pattern = td_pattern if item.startswith(td_pattern) else th_pattern
 
-                result[col] = mark_safe(
-                    result[col].replace(cell_pattern, td_pattern + dict_to_attrs(attrs))
-                )
+                result[col] = mark_safe(result[col].replace(cell_pattern, td_pattern + dict_to_attrs(attrs)))
 
     return results
