@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.utils.translation import gettext
+
 from suit.tests.mixins import ModelsTestCaseMixin, UserTestCaseMixin
 from suit.tests.models import Book, BookAdmin, test_app_label
 

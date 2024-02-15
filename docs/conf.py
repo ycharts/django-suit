@@ -46,8 +46,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Django Suit'
-copyright = u'2013, Kaspars Sprogis (darklow)'
+project = 'Django Suit'
+copyright = '2013, Kaspars Sprogis (darklow)'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -188,7 +188,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-    ('index', 'DjangoSuit.tex', u'Django Suit Documentation', u'Kaspars Sprogis (darklow)', 'manual'),
+    ('index', 'DjangoSuit.tex', 'Django Suit Documentation', 'Kaspars Sprogis (darklow)', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -216,7 +216,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [('index', 'djangosuit', u'Django Suit Documentation', [u'Kaspars Sprogis (darklow)'], 1)]
+man_pages = [('index', 'djangosuit', 'Django Suit Documentation', ['Kaspars Sprogis (darklow)'], 1)]
 
 # If true, show URL addresses after external links.
 # man_show_urls = False
@@ -231,8 +231,8 @@ texinfo_documents = [
     (
         'index',
         'DjangoSuit',
-        u'Django Suit Documentation',
-        u'Kaspars Sprogis (darklow)',
+        'Django Suit Documentation',
+        'Kaspars Sprogis (darklow)',
         'DjangoSuit',
         'One line description of project.',
         'Miscellaneous',

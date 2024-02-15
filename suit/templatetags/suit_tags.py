@@ -1,11 +1,13 @@
 import itertools
+
 from django import template
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import ForeignKey
 from django.template.defaulttags import NowNode
 from django.utils.safestring import mark_safe
-from suit.config import get_config
+
 from suit import utils
+from suit.config import get_config
 
 try:
     from django.core.urlresolvers import NoReverseMatch, reverse

@@ -7,7 +7,7 @@ https://github.com/django-debug-toolbar/django-debug-toolbar/blob/master/debug_t
 
 """
 import django
-from django.template.defaulttags import url
 from django.contrib.contenttypes import admin as ct_admin
+from django.template.defaulttags import url
 
 tpl_context_class = dict

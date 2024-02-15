@@ -1,9 +1,9 @@
-import sys
 import os
+import sys
 import time
 
+from watchdog.events import FileModifiedEvent, FileSystemEventHandler
 from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler, FileModifiedEvent
 
 
 class LessCompiler(FileSystemEventHandler):
@@ -17,7 +17,6 @@ class LessCompiler(FileSystemEventHandler):
         else:
             destination = sys.argv[2]
         cmd = 'lessc %s > %s -x' % (source, os.path.abspath(destination))
-        print(cmd)
         os.system(cmd)
 
     def on_any_event(self, event):

@@ -1,9 +1,9 @@
+from random import randint
+
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.core.management import CommandError
-from django.core.management import call_command
+from django.core.management import call_command, CommandError
 from django.test import TestCase
-from random import randint
 
 # Django 1.7 compatiblity
 try:

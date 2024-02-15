@@ -1,0 +1,34 @@
+[tool.ruff]
+# https://docs.astral.sh/ruff/configuration/#using-pyprojecttoml
+
+fix = true
+
+ignore = [
+    "E203",  # Whitespace before '{symbol}'
+    "F401",  # {name} imported but unused
+]
+
+line-length = 120
+
+# https://docs.astral.sh/ruff/rules/
+select = [
+    # First two lines represent default flake8 configuration
+    "E", "W",  # PyCodestyle
+    "F",       # PyFlakes
+    "T10",     # flake8-debugger: catch debug statements
+    "T20",     # flake8-print: catch print statements
+    "UP025",   # unicode-kind-prefix: Prevent unicode prefix in strings
+    "I",       # isort: Check import order and add missing required imports
+]
+
+show-fixes = true
+
+[tool.ruff.isort]
+# https://docs.astral.sh/ruff/settings/#isort
+# Combine aliased imports into the same import statement.
+combine-as-imports = true
+# With imports including at least one alias, force each imported member to its own line.
+force-wrap-aliases = true
+# Do not sort imports by type (constant, class, function, etc.).
+# Instead, sort them alphabetically and case-insensitively.
+order-by-type = false

@@ -1,4 +1,5 @@
 from django import template
+
 from ..compat import url as url_compat
 
 register = template.Library()

@@ -1,5 +1,6 @@
-from django.contrib.admin import ModelAdmin
 from django.conf import settings
+from django.contrib.admin import ModelAdmin
+
 from . import VERSION
 
 
@@ -55,10 +56,11 @@ ModelAdmin.list_per_page = get_config('LIST_PER_PAGE')
 
 
 def setup_filer():
-    from suit.widgets import AutosizedTextarea
-    from filer.admin.imageadmin import ImageAdminForm
-    from filer.admin.fileadmin import FileAdminChangeFrom
     from filer.admin import FolderAdmin
+    from filer.admin.fileadmin import FileAdminChangeFrom
+    from filer.admin.imageadmin import ImageAdminForm
+
+    from suit.widgets import AutosizedTextarea
 
     def ensure_meta_widgets(meta_cls):
         if not hasattr(meta_cls, 'widgets'):

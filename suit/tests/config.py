@@ -1,10 +1,11 @@
-from django.contrib.admin import ModelAdmin
 from django.conf import settings
+from django.contrib.admin import ModelAdmin
+
 from suit import VERSION
 from suit.config import default_config, get_config
 from suit.templatetags.suit_tags import admin_url
+from suit.tests.mixins import ModelsTestCaseMixin, UserTestCaseMixin
 from suit.tests.models import Book
-from suit.tests.mixins import UserTestCaseMixin, ModelsTestCaseMixin
 
 
 class ConfigTestCase(UserTestCaseMixin):
