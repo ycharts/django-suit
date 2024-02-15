@@ -1,10 +1,11 @@
-from django.contrib.admin import ModelAdmin
 from django.conf import settings
+from django.contrib.admin import ModelAdmin
+
 from suit import VERSION
 from suit.config import default_config, get_config
 from suit.templatetags.suit_tags import admin_url
+from suit.tests.mixins import ModelsTestCaseMixin, UserTestCaseMixin
 from suit.tests.models import Book
-from suit.tests.mixins import UserTestCaseMixin, ModelsTestCaseMixin
 
 
 class ConfigTestCase(UserTestCaseMixin):
@@ -18,36 +19,25 @@ class ConfigTestCase(UserTestCaseMixin):
         except AttributeError:
             pass
         default_suit_config = default_config()
-        self.assertEqual(get_config('ADMIN_NAME'),
-                         default_suit_config['ADMIN_NAME'])
+        self.assertEqual(get_config('ADMIN_NAME'), default_suit_config['ADMIN_NAME'])
 
         # Defined as None, should also use fallback
         admin_name = None
-        settings.SUIT_CONFIG = {
-            'ADMIN_NAME': admin_name
-        }
-        self.assertEqual(get_config('ADMIN_NAME'),
-                         default_suit_config['ADMIN_NAME'])
+        settings.SUIT_CONFIG = {'ADMIN_NAME': admin_name}
+        self.assertEqual(get_config('ADMIN_NAME'), default_suit_config['ADMIN_NAME'])
 
     def test_suit_config_when_defined_but_no_key(self):
-        settings.SUIT_CONFIG = {
-            'RANDOM_KEY': 123
-        }
+        settings.SUIT_CONFIG = {'RANDOM_KEY': 123}
         default_suit_config = default_config()
-        self.assertEqual(get_config('ADMIN_NAME'),
-                         default_suit_config['ADMIN_NAME'])
+        self.assertEqual(get_config('ADMIN_NAME'), default_suit_config['ADMIN_NAME'])
         # Defined as empty, should stay empty
         admin_name = ''
-        settings.SUIT_CONFIG = {
-            'ADMIN_NAME': admin_name
-        }
+        settings.SUIT_CONFIG = {'ADMIN_NAME': admin_name}
         self.assertEqual(get_config('ADMIN_NAME'), admin_name)
 
     def test_suit_config_when_defined(self):
         admin_name = 'Custom Name'
-        settings.SUIT_CONFIG = {
-            'ADMIN_NAME': admin_name
-        }
+        settings.SUIT_CONFIG = {'ADMIN_NAME': admin_name}
         self.assertEqual(get_config('ADMIN_NAME'), admin_name)
 
     def test_django_modeladmin_overrides(self):
@@ -57,7 +47,6 @@ class ConfigTestCase(UserTestCaseMixin):
 
 
 class ConfigWithModelsTestCase(ModelsTestCaseMixin, UserTestCaseMixin):
-
     def create_book(self):
         book = Book(pk=2, name='Some book')
         book.save()
