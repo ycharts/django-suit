@@ -6,7 +6,7 @@ requests <https://github.com/darklow/django-suit/pulls?q=sort%3Aupdated-desc+is%
 
 v.0.3.1 (2025-06-23)
 --------------------
-* Add support for Django 3.11
+* Add support for Python 3.11
 
 
 v.0.3.0 (2024-01-18)
