@@ -10,7 +10,7 @@ from suit import utils
 from suit.config import get_config
 
 try:
-    from django.core.urlresolvers import NoReverseMatch, reverse
+    from django.urls import NoReverseMatch, reverse
 except ImportError:
     from django.urls import NoReverseMatch, reverse
 

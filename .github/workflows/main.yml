@@ -24,6 +24,8 @@ jobs:
         include:
           - python-version: "3.11"
             django-version: "5.0"
+          - python-version: "3.12"
+            django-version: "5.2"
     steps:
       # Checks-out the  repository.
       - uses: actions/checkout@v3
